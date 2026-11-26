@@ -34,8 +34,9 @@ new conversations. Submissions are scored by log loss, so lower is better.
 
 **Competition leaderboard** (private leaderboard, final standing; scores are log loss, lower is better)
 
-This is my overall result in the competition. My final submission was made with a separate inference
-notebook, which is not in this repository.
+This is my overall result in the competition. I no longer have a record of exactly which training run
+produced the final submission's model; it was trained with similar, but not identical, code. The inference
+notebook is not in this repository.
 
 | Teams | My rank | My score | Winning score |
 |---|---|---|---|
@@ -66,3 +67,19 @@ code cell (torch 2.4, torch_xla 2.4, transformers 4.43.3, peft 0.11.1).
 - One run with one seed, trained on about a quarter of the competition training set.
 - A swap augmentation (exchanging answers A and B) is written but switched off in this version.
 - This repository holds the training notebook only; the inference notebook is not included.
+
+## Credits
+
+This notebook started from Kishan Vavdara's public notebook
+[LMSYS - Llama-3 [TPU train]](https://www.kaggle.com/code/kishanvavdara/lmsys-llama-3-tpu-train) (Apache 2.0).
+The notebook's structure and TPU training code are copied or adapted from that notebook: the config class,
+seeding, token counting, tokenisation, the batch generator, the optimizer, scheduler and loss setup, the
+training loop with its logging, and the loss plot.
+The model-sharding helper is adapted from [HeegyuKim/torch-xla-SPMD](https://github.com/HeegyuKim/torch-xla-SPMD).
+I also combined code and ideas from other public notebooks in this competition and no longer have a record
+of all of them.
+
+Compared with the starting notebook, this version uses Gemma 2 9B instead of Llama 3 8B and is updated for
+torch_xla 2.4. It keeps up to the last five turns of each conversation, dropping older turns when the text is
+too long. It trains LoRA adapters on all attention and MLP projections of a duplicated block of layers, with
+DoRA and PiSSA. It also samples data by model pair and adds a held-out validation split.
