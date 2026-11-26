@@ -2,6 +2,7 @@
 
 My training notebook for the Kaggle competition
 [LMSYS – Chatbot Arena Human Preference Predictions](https://www.kaggle.com/competitions/lmsys-chatbot-arena) (2024).
+My final standing in the competition: 305th of 1,688 teams (top 18%) on the private leaderboard.
 
 ## The task
 
@@ -30,6 +31,21 @@ new conversations. Submissions are scored by log loss, so lower is better.
   with batches of 64, 9,984 of them are evaluated.
 
 ## Results
+
+**Competition leaderboard** (private leaderboard, final standing; scores are log loss, lower is better)
+
+This is my overall result in the competition. My final submission was made with a separate inference
+notebook, which is not in this repository.
+
+| Teams | My rank | My score | Winning score |
+|---|---|---|---|
+| 1,688 | 305 (top 18%) | 1.01186 | 0.96898 |
+
+A data leak was found in this competition's test set. Because of it, public leaderboard scores are not
+reliable, and the organisers adjusted the private leaderboard after the competition ended: it is now
+scored on about 45% of the test data. I report only the private result.
+
+**Local validation** (from the notebook)
 
 | Metric | Value |
 |---|---|
